@@ -21,7 +21,7 @@ void initiateSnakes(int numSnakes, int grid, int occupied[], int *occupiedCount,
 int searchNumber(int arr[], int size, int num);
 int searchNumber2D(int arr[][2], int col, int row, int num);
 
-void printBoard(Snake S[], Ladder L[], Player playerArray[], int snakeCount,
+void printBoardVSPlayer(Snake S[], Ladder L[], Player playerArray[], int snakeCount,
                 int ladderCount, int playerCount, int grid);
 
 void printBoardVSComputer(Snake S[], Ladder L[], Player playerArray[], int snakeCount,

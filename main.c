@@ -40,8 +40,8 @@ int main() {
     case 2:
       printf("\n");
       printf("Banyak player (1 sampai 4): ");
-      int players;
-      scanf("%d", &players);
+      int playerss;
+      scanf("%d", &playerss);
       printf("\n");
     case 3:
       printf("\n");
@@ -79,7 +79,7 @@ void multiplayer(int players) {
       system("clear");
       printf("Keterangan: L = Tangga, S = Ular");
       printf("\n");
-      printBoard(S, L, playerArray, snakeCount, ladderCount, players, grid);
+      printBoardVSPlayer(S, L, playerArray, snakeCount, ladderCount, players, grid);
       int temp;
       getchar();
       printf("Giliran Player %d\n", i+1);
@@ -88,6 +88,7 @@ void multiplayer(int players) {
       
 
       move(rollDice(), &playerArray[i], grid);
+      checkLadderSnake(&playerArray[i], L, S, ladderCount, snakeCount);
     }
   }
 }
