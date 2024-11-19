@@ -4,7 +4,8 @@
 void move(int n, Player *player, int grid);
 void setPosition(int n, Player *player);
 int rollDice();
-void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount, int snakeCount);
+void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount,
+                      int snakeCount);
 
 int rollDice() {
   int min = 1;
@@ -23,10 +24,20 @@ void move(int n, Player *player, int grid) {
 
 void setPosition(int n, Player *player) { (*player).position = n; }
 
-void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount, int snakeCount) {
+void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount,
+                      int snakeCount) {
   for (int i = 0; i < ladderCount; i++) {
     if ((*player).position == L[i][0]) {
       setPosition(L[i][1], player);
+      printf("Player %s discovered a Ladder! (YAYY :D) %s now on block %d",
+             (*player).name, (*player).name, L[i][1]);
+    }
+  }
+  for (int i = 0; i < snakeCount; i++) {
+    if ((*player).position == S[i][0]) {
+      setPosition(S[i][1], player);
+      printf("Player %s discovered a Snake! (AWW T-T) %s now on block %d",
+             (*player).name, (*player).name, S[i][1]);
     }
   }
 }
