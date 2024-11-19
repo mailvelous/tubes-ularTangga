@@ -21,15 +21,18 @@ void initiateSnakes(int numSnakes, int grid, int occupied[], int *occupiedCount,
 int searchNumber(int arr[], int size, int num);
 int searchNumber2D(int arr[][2], int col, int row, int num);
 
-void printBoardVSPlayer(Snake S[], Ladder L[], Player playerArray[], int snakeCount,
-                int ladderCount, int playerCount, int grid);
+void printBoardVSPlayer(Snake S[], Ladder L[], Player playerArray[],
+                        int snakeCount, int ladderCount, int playerCount,
+                        int grid);
 
-void printBoardVSComputer(Snake S[], Ladder L[], Player playerArray[], int snakeCount,
-                int ladderCount, int playerCount, int grid);
+void printBoardVSComputer(Snake S[], Ladder L[], Player playerArray[],
+                          int snakeCount, int ladderCount, int playerCount,
+                          int grid);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void printBoardVSPlayer(Snake S[], Ladder L[], Player playerArray[], int snakeCount,
-                int ladderCount, int playerCount, int grid) {
+void printBoardVSPlayer(Snake S[], Ladder L[], Player playerArray[],
+                        int snakeCount, int ladderCount, int playerCount,
+                        int grid) {
   int gridNum = grid * grid;
   for (int i = 0; i < grid; i++) {
     for (int j = 0; j < grid; j++) {
@@ -123,8 +126,51 @@ void printBoardVSPlayer(Snake S[], Ladder L[], Player playerArray[], int snakeCo
   printf("\n");
 }
 
-void printBoardVSComputer(Snake S[], Ladder L[], Player playerArray[], int snakeCount,
-                int ladderCount, int playerCount, int grid) {
+void printBlock0(Player playerArray[], int playerCount) {
+  char colors[4][7] = {"\033[31m", "\033[34m", "\033[32m", "\033[33m"};
+  int playerHere[playerCount];
+  int playerHereCount = 0;
+  searchPlayer(playerArray, playerCount, 0, playerHere, &playerHereCount);
+  if (playerHereCount > 0) {
+    printf("Block 0 (Luar papan)\n");
+    printf("---------\n");
+    printf("        |\n");
+
+    if (playerHereCount == 4) {
+      printf("  ");
+
+      for (int k = 0; k < playerHereCount; k++) {
+        printPlayerIcons(playerHere[k], colors, 4);
+      }
+      printf("  |");
+    } else if (playerHereCount == 3) {
+      printf("  ");
+
+      for (int k = 0; k < playerHereCount; k++) {
+        printPlayerIcons(playerHere[k], colors, 4);
+      }
+      printf("   |");
+    } else if (playerHereCount == 2) {
+      printf("   ");
+      for (int k = 0; k < playerHereCount; k++) {
+        printPlayerIcons(playerHere[k], colors, 4);
+      }
+      printf("   |");
+    } else if (playerHereCount == 1) {
+      printf("   ");
+      for (int k = 0; k < playerHereCount; k++) {
+        printPlayerIcons(playerHere[k], colors, 4);
+      }
+      printf("    |");
+    }
+    printf("\n        |\n");
+    printf("---------\n");
+  }
+}
+
+void printBoardVSComputer(Snake S[], Ladder L[], Player playerArray[],
+                          int snakeCount, int ladderCount, int playerCount,
+                          int grid) {
   int gridNum = grid * grid;
   for (int i = 0; i < grid; i++) {
     for (int j = 0; j < grid; j++) {
@@ -217,7 +263,6 @@ void printBoardVSComputer(Snake S[], Ladder L[], Player playerArray[], int snake
   }
   printf("\n");
 }
-
 
 void initiateBoard(int snakeCount, int ladderCount, Snake S[], Ladder L[]) {
   srand(time(0));
@@ -299,7 +344,7 @@ void initiatePlayers(Player playerArray[], int playerCount) {
     printf("Nama player ke-%d: ", i + 1);
     getchar();
     scanf("%49[^\n]", playerArray[i].name);
-    playerArray[i].position = 1;
+    playerArray[i].position = 0;
   }
 }
 void resetColor() { printf("\033[0m"); }

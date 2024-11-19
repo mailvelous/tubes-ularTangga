@@ -80,6 +80,7 @@ void multiplayer(int players) {
       printf("Keterangan: L = Tangga, S = Ular");
       printf("\n");
       printBoardVSPlayer(S, L, playerArray, snakeCount, ladderCount, players, grid);
+      printBlock0(playerArray, players);
       int temp;
       getchar();
       printf("Giliran Player %d\n", i+1);
