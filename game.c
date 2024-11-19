@@ -4,6 +4,8 @@
 void move(int n, Player *player, int grid);
 void setPosition(int n, Player *player);
 int rollDice();
+
+
 void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount,
                       int snakeCount);
 
@@ -22,7 +24,29 @@ void move(int n, Player *player, int grid) {
   printf("Player %s have moved %d steps\n", (*player).name, n);
 }
 
-void setPosition(int n, Player *player) { (*player).position = n; }
+void setPosition(int n, Player *player) {
+  (*player).position = n; 
+  }
+
+void timer(){
+    int seconds = 3;
+
+  printf("Seconds: ");
+
+  while (seconds > 0)
+  {
+
+    int h = seconds / 3600;
+    int m = (seconds % 3600) / 60;
+    int s = seconds % 60;
+    printf("\r%02d:%02d:%02d", h, m, s);
+    fflush(stdout);
+    clock_t stop = clock() + CLOCKS_PER_SEC;
+    while (clock() < stop) { }
+    seconds--;
+  } 
+  printf("\rTime's up!\n");
+}
 
 void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount,
                       int snakeCount) {
