@@ -4,6 +4,7 @@
 void move(int n, Player *player, int grid);
 void setPosition(int n, Player *player);
 int rollDice();
+void timer();
 
 
 void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount,

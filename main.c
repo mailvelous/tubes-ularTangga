@@ -85,6 +85,7 @@ void multiplayer(int players) {
       getchar();
       printf("Giliran Player %d\n", i+1);
       printf("Tekan angka 1 untuk mengocok dadu\n");
+      timer();
       scanf("%d", &temp);
       
 
@@ -95,7 +96,38 @@ void multiplayer(int players) {
 }
 
 void computer(int computer){
-  
+    // printf("Ceritanya anda bermain nichhh dengan %d player", players);
+  char colors[4][7] = {"\033[31m", "\033[34m", "\033[32m", "\033[33m"};
+  Player playerArray[computer];
+  initiatePlayers(playerArray, computer);
+  printPlayers(playerArray, computer, colors, 4);
+  int difficulty = setDifficulty();
+  int ladderCount, snakeCount;
+  getLadderSnakeCount(&ladderCount, &snakeCount, difficulty);
+  Snake S[snakeCount];
+  Ladder L[ladderCount];
+  initiateBoard(snakeCount, ladderCount, S, L);
+  bool isRunning = true;
+  int grid = 10;
+  while (isRunning) {
+    for (int i = 0; i < computer; i++) {
+      system("clear");
+      printf("Keterangan: L = Tangga, S = Ular");
+      printf("\n");
+      printBoardVSPlayer(S, L, playerArray, snakeCount, ladderCount, computer, grid);
+      printBlock0(playerArray, computer);
+      int temp;
+      getchar();
+      printf("Giliran Player %d\n", i+1);
+      printf("Tekan angka 1 untuk mengocok dadu\n");
+      timer();
+      scanf("%d", &temp);
+      
+
+      move(rollDice(), &playerArray[i], grid);
+      checkLadderSnake(&playerArray[i], L, S, ladderCount, snakeCount);
+    }
+  }
 }
 
 int setDifficulty() {
