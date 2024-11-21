@@ -364,6 +364,7 @@ void printPlayers(Player playerArray[], int playerCount, char colors[][7],
     printPlayerIcons(i, colors, colorCount);
     printf(": %s\n", playerArray[i].name);
   }
+  printf("\n");
 }
 
 void getLadderSnakeCount(int *ladderCount, int *snakeCount, int difficulty) {
