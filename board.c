@@ -188,9 +188,9 @@ void printBoardVSComputer(Snake S[], Ladder L[], Player playerArray[],
       int ladderNum = searchNumber2D(L, 2, ladderCount, sum);
       int snakeNum = searchNumber2D(S, 2, snakeCount, sum);
       if (ladderNum != -1) {
-        printf("L%d      |", ladderNum + 1);
+        printf("↑%d      |", ladderNum + 1);
       } else if (snakeNum != -1) {
-        printf("S%d      |", snakeNum + 1);
+        printf("↓%d      |", snakeNum + 1);
       } else {
         printf("        |");
       }

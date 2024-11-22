@@ -81,15 +81,21 @@ void multiplayer(int players) {
       printf("\n");
       printBoardVSPlayer(S, L, playerArray, snakeCount, ladderCount, players, grid);
       printBlock0(playerArray, players);
-      int temp;
-      getchar();
+      char ch;
+
       printf("Giliran Player %d\n", i+1);
       printf("Tekan angka 1 untuk mengocok dadu\n");
-      timer();
-      scanf("%d", &temp);
+      while (isRunning) {
+        ch = getch();
+        if (ch == ' ') {
+          break;
+        }
+      }
+
       
 
       move(rollDice(), &playerArray[i], grid);
+
       checkLadderSnake(&playerArray[i], L, S, ladderCount, snakeCount);
     }
   }
@@ -118,9 +124,9 @@ void computer(int computer){
       printBlock0(playerArray, computer);
       int temp;
       getchar();
-      printf("Giliran Player %d\n", i+1);
+      printf("Giliran Comoputer %d\n", i+1);
       printf("Tekan angka 1 untuk mengocok dadu\n");
-      timer();
+      // timer();
       scanf("%d", &temp);
       
 
