@@ -10,9 +10,21 @@ void timer();
 void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount,
                       int snakeCount);
 
-int rollDice() {
+int rollDiceEasy() {
+  int min = 5;
+  int max = 6;
+  return (rand() % (max - min + 1) + min);
+}
+
+int rollDiceNormal() {
   int min = 1;
   int max = 6;
+  return (rand() % (max - min + 1) + min);
+}
+
+int rollDiceHard() {
+  int min = 1;
+  int max = 3;
   return (rand() % (max - min + 1) + min);
 }
 
