@@ -1,16 +1,18 @@
 #ifndef game_c
 #define game_c
 #include <stdio.h>
-#include "board.c"
+#include <time.h>
+#include "types.h"
 #include <stdlib.h>
 void move(int n, Player *player, int grid);
 void setPosition(int n, Player *player);
 int rollDice(int difficulty);
 void timer();
-
+int checkNearestLadder(Ladder L[], int ladderCount, Player player);
 
 void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount,
                       int snakeCount);
+int checkWin();
 
 int rollDice(int difficulty) {
   int min = 1;
@@ -26,6 +28,16 @@ int rollDice(int difficulty) {
   }
 }
 
+int checkNearestLadder(Ladder L[], int ladderCount, Player player) {
+  for (int i = player.position+1; i <= player.position + 6; i++) {
+    for (int j =0; j < ladderCount; j++) {
+      if (i == L[i][0]) {
+        return i;
+      }
+    }
+  }
+  return -1;
+}
 
 void move(int n, Player *player, int grid) {
   int max = grid * grid;
@@ -77,5 +89,7 @@ void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount,
     }
   }
 }
+
+
 
 #endif

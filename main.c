@@ -1,18 +1,15 @@
 #include "game.c"
+#include "types.h"
+#include "board.c"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-
-
-
-
+// #include <curses.h>
 
 void multiplayer(int players);
 int setDifficulty();
 
 int main() {
-
   printf("\n");
   printf("---------------------\n");
   printf("Snakes and Ladders !!\n");
@@ -68,11 +65,8 @@ void multiplayer(int players) {
   Snake S[snakeCount];
   Ladder L[ladderCount];
   int difficulty = setDifficulty();
-
-
   initiatePlayers(playerArray, players);
   printPlayers(playerArray, players, colors, 4);
-  
   getLadderSnakeCount(&ladderCount, &snakeCount, difficulty);
 
 
