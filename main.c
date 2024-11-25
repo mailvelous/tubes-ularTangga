@@ -83,9 +83,8 @@ void multiplayer(int players) {
       char ch;
 
       printf("Giliran Player %d\n", i+1);
-      printf("Tekan angka 1 untuk mengocok dadu\n");
+      printf("Tekan spasi untuk mengocok dadu\n");
       while (isRunning) {
-        
         ch = getchar();
         if (ch == ' ') {
           break;
