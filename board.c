@@ -601,4 +601,11 @@ void initiateComputers(Computer computerArray[], int computerCount) {
     computerArray[i].position = 0;
   }
 }
-#endif
+
+// void printPlayers(Player playerArray[], int playerCount, char colors[][7],
+//                   int colorCount) {
+//   for (int i = 0; i < playerCount; i++) {
+//     printPlayerIcons(i, colors, colorCount);
+//     printf(": %s\n", playerArray[i].name);
+//   }
+// }
