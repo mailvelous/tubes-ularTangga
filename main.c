@@ -1,6 +1,6 @@
+#include "board.c"
 #include "game.c"
 #include "types.h"
-#include "board.c"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -55,8 +55,6 @@ int main() {
   return 0;
 }
 
-
-
 void multiplayer(int players) {
   // printf("Ceritanya anda bermain nichhh dengan %d player", players);
   char colors[4][7] = {"\033[31m", "\033[34m", "\033[32m", "\033[33m"};
@@ -69,7 +67,6 @@ void multiplayer(int players) {
   Snake S[snakeCount];
   Ladder L[ladderCount];
 
-
   initiateBoard(snakeCount, ladderCount, S, L);
   bool isRunning = true;
   int grid = 10;
@@ -78,12 +75,14 @@ void multiplayer(int players) {
       system("clear");
       printf("Keterangan: L = Tangga, S = Ular");
       printf("\n");
-      printBoardVSPlayer(S, L, playerArray, snakeCount, ladderCount, players, grid);
+      printBoardVSPlayer(S, L, playerArray, snakeCount, ladderCount, players,
+                         grid);
       printBlock0(playerArray, players);
       char ch;
 
-      printf("Giliran Player %d\n", i+1);
-      printf("Tekan spasi untuk mengocok dadu\n");
+      printf("Giliran Player %d (", i + 1);
+      printPlayerIcons(i, colors, 4);
+      printf(")\nTekan spasi untuk mengocok dadu\n");
       while (isRunning) {
         ch = getchar();
         if (ch == ' ') {
@@ -91,11 +90,27 @@ void multiplayer(int players) {
         }
       }
 
-      
-
-      move(rollDice(difficulty), &playerArray[i], grid);
+      int dice = rollDice(difficulty);
+      move(dice, &playerArray[i], grid);
 
       checkLadderSnake(&playerArray[i], L, S, ladderCount, snakeCount);
+
+      printBoardVSPlayer(S, L, playerArray, snakeCount, ladderCount, players,
+                         grid);
+      printBlock0(playerArray, players);
+      if (dice == 6) {
+        i -= 1;
+        printf("Karena mendapat angka 6, Player %d (", i + 1);
+        printPlayerIcons(i, colors, 4);
+        printf(") mendapat giliran lagi");
+      }
+      printf("\nTekan spasi untuk ke giliran selanjutnya\n");
+      while (isRunning) {
+        ch = getchar();
+        if (ch == ' ') {
+          break;
+        }
+      }
     }
   }
 }
@@ -109,11 +124,10 @@ void multiplayer(int players) {
 //   Snake S[snakeCount];
 //   Ladder L[ladderCount];
 
-
 //   initiatePlayers(computerArray, computer);
 //   printPlayers(computerArray, computer, colors, 4);
 //   int difficulty = setDifficulty();
-  
+
 //   getLadderSnakeCount(&ladderCount, &snakeCount, difficulty);
 
 //   initiateBoard(snakeCount, ladderCount, S, L);
@@ -124,15 +138,13 @@ void multiplayer(int players) {
 //       system("clear");
 //       printf("Keterangan: L = Tangga, S = Ular");
 //       printf("\n");
-//       printBoardVSPlayer(S, L, computerArray, snakeCount, ladderCount, computer, grid);
-//       printBlock0(computerArray, computer);
-//       int temp;
+//       printBoardVSPlayer(S, L, computerArray, snakeCount, ladderCount,
+//       computer, grid); printBlock0(computerArray, computer); int temp;
 //       getchar();
 //       printf("Giliran Comoputer %d\n", i+1);
 //       printf("Tekan angka 1 untuk mengocok dadu\n");
 //       // timer();
 //       scanf("%d", &temp);
-      
 
 //       move(rollDice(difficulty), &playerArray[i], grid);
 //       move(rollDice(difficulty), &computerArray[i], grid);
