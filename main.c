@@ -106,46 +106,46 @@ void multiplayer(int players) {
   }
 }
 
-void computer(int computer, int player){
-    // printf("Ceritanya anda bermain nichhh dengan %d player", players);
-  char colors[4][7] = {"\033[31m", "\033[34m", "\033[32m", "\033[33m"};
-  Computer computerArray[computer];
-  Computer playerArray[player];
-  int ladderCount, snakeCount;
-  Snake S[snakeCount];
-  Ladder L[ladderCount];
+// void computer(int computer, int player){
+//     // printf("Ceritanya anda bermain nichhh dengan %d player", players);
+//   char colors[4][7] = {"\033[31m", "\033[34m", "\033[32m", "\033[33m"};
+//   Computer computerArray[computer];
+//   Computer playerArray[player];
+//   int ladderCount, snakeCount;
+//   Snake S[snakeCount];
+//   Ladder L[ladderCount];
 
 
-  initiatePlayers(computerArray, computer);
-  printPlayers(computerArray, computer, colors, 4);
-  int difficulty = setDifficulty();
+//   initiatePlayers(computerArray, computer);
+//   printPlayers(computerArray, computer, colors, 4);
+//   int difficulty = setDifficulty();
   
-  getLadderSnakeCount(&ladderCount, &snakeCount, difficulty);
+//   getLadderSnakeCount(&ladderCount, &snakeCount, difficulty);
 
-  initiateBoard(snakeCount, ladderCount, S, L);
-  bool isRunning = true;
-  int grid = 10;
-  while (isRunning) {
-    for (int i = 0; i < computer; i++) {
-      system("clear");
-      printf("Keterangan: L = Tangga, S = Ular");
-      printf("\n");
-      printBoardVSPlayer(S, L, computerArray, snakeCount, ladderCount, computer, grid);
-      printBlock0(computerArray, computer);
-      int temp;
-      getchar();
-      printf("Giliran Comoputer %d\n", i+1);
-      printf("Tekan angka 1 untuk mengocok dadu\n");
-      // timer();
-      scanf("%d", &temp);
+//   initiateBoard(snakeCount, ladderCount, S, L);
+//   bool isRunning = true;
+//   int grid = 10;
+//   while (isRunning) {
+//     for (int i = 0; i < computer; i++) {
+//       system("clear");
+//       printf("Keterangan: L = Tangga, S = Ular");
+//       printf("\n");
+//       printBoardVSPlayer(S, L, computerArray, snakeCount, ladderCount, computer, grid);
+//       printBlock0(computerArray, computer);
+//       int temp;
+//       getchar();
+//       printf("Giliran Comoputer %d\n", i+1);
+//       printf("Tekan angka 1 untuk mengocok dadu\n");
+//       // timer();
+//       scanf("%d", &temp);
       
 
-      move(rollDice(difficulty), &playerArray[i], grid);
-      move(rollDice(difficulty), &computerArray[i], grid);
-      checkLadderSnake(&playerArray[i], L, S, ladderCount, snakeCount);
-    }
-  }
-}
+//       move(rollDice(difficulty), &playerArray[i], grid);
+//       move(rollDice(difficulty), &computerArray[i], grid);
+//       checkLadderSnake(&playerArray[i], L, S, ladderCount, snakeCount);
+//     }
+//   }
+// }
 
 int setDifficulty() {
   printf("1. Easy\n2. Normal\n3. Hard\n");
