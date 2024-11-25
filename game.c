@@ -10,23 +10,20 @@ void timer();
 void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount,
                       int snakeCount);
 
-int rollDiceEasy() {
-  int min = 5;
-  int max = 6;
-  return (rand() % (max - min + 1) + min);
-}
-
-int rollDiceNormal() {
+int rollDice(int difficulty) {
   int min = 1;
   int max = 6;
-  return (rand() % (max - min + 1) + min);
+  if (difficulty == 1){
+    return (rand() % (max - min + 1) + min);
+  } else if (difficulty == 2) {
+    return (rand() % (max - min + 1) + min);
+  } else if (difficulty == 3) {
+    return (rand() % (max - min + 1) + min);
+  } else {
+    return 0; // Invalid difficulty level.
+  }
 }
 
-int rollDiceHard() {
-  int min = 1;
-  int max = 3;
-  return (rand() % (max - min + 1) + min);
-}
 
 void move(int n, Player *player, int grid) {
   int max = grid * grid;

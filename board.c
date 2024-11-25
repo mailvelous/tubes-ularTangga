@@ -347,6 +347,8 @@ void initiatePlayers(Player playerArray[], int playerCount) {
     playerArray[i].position = 0;
   }
 }
+
+
 void resetColor() { printf("\033[0m"); }
 
 void printPlayerIcons(int playerNum, char colors[][7], int colorCount) {
@@ -388,5 +390,24 @@ void searchPlayer(Player playerArray[], int playerCount, int blockNum,
       playerHere[*playerHereCount] = i;
       *playerHereCount += 1;
     }
+  }
+}
+
+/////////////////////////////////
+
+void initiateComputers(Computer computerArray[], int computerCount) {
+  for (int i = 0; i < computerCount; i++) {
+    printf("Nama player ke-%d: ", i + 1);
+    getchar();
+    scanf("%49[^\n]", computerArray[i].name);
+    computerArray[i].position = 0;
+  }
+}
+
+void printPlayers(Player playerArray[], int playerCount, char colors[][7],
+                  int colorCount) {
+  for (int i = 0; i < playerCount; i++) {
+    printPlayerIcons(i, colors, colorCount);
+    printf(": %s\n", playerArray[i].name);
   }
 }
