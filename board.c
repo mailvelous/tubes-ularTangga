@@ -609,3 +609,5 @@ void initiateComputers(Computer computerArray[], int computerCount) {
 //     printf(": %s\n", playerArray[i].name);
 //   }
 // }
+
+#endif
