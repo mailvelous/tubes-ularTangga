@@ -1,3 +1,5 @@
+#ifndef board_c
+#define board_c
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -403,11 +405,4 @@ void initiateComputers(Computer computerArray[], int computerCount) {
     computerArray[i].position = 0;
   }
 }
-
-void printPlayers(Player playerArray[], int playerCount, char colors[][7],
-                  int colorCount) {
-  for (int i = 0; i < playerCount; i++) {
-    printPlayerIcons(i, colors, colorCount);
-    printf(": %s\n", playerArray[i].name);
-  }
-}
+#endif

@@ -1,9 +1,11 @@
-// #include <stdio.h>
+#ifndef game_c
+#define game_c
+#include <stdio.h>
 #include "board.c"
 #include <stdlib.h>
 void move(int n, Player *player, int grid);
 void setPosition(int n, Player *player);
-int rollDice();
+int rollDice(int difficulty);
 void timer();
 
 
@@ -75,3 +77,5 @@ void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount,
     }
   }
 }
+
+#endif
