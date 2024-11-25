@@ -3,6 +3,8 @@
 typedef struct {
   char name[50];
   int position;
+  int score;
+  int type;
 } Player;
 
 typedef struct {
