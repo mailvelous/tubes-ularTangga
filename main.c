@@ -64,13 +64,18 @@ void multiplayer(int players) {
   // printf("Ceritanya anda bermain nichhh dengan %d player", players);
   char colors[4][7] = {"\033[31m", "\033[34m", "\033[32m", "\033[33m"};
   Player playerArray[players];
-  initiatePlayers(playerArray, players);
-  printPlayers(playerArray, players, colors, 4);
-  int difficulty = setDifficulty();
   int ladderCount, snakeCount;
-  getLadderSnakeCount(&ladderCount, &snakeCount, difficulty);
   Snake S[snakeCount];
   Ladder L[ladderCount];
+  int difficulty = setDifficulty();
+
+
+  initiatePlayers(playerArray, players);
+  printPlayers(playerArray, players, colors, 4);
+  
+  getLadderSnakeCount(&ladderCount, &snakeCount, difficulty);
+
+
   initiateBoard(snakeCount, ladderCount, S, L);
   bool isRunning = true;
   int grid = 10;
@@ -94,24 +99,29 @@ void multiplayer(int players) {
 
       
 
-      move(rollDice(), &playerArray[i], grid);
+      move(rollDice(difficulty), &playerArray[i], grid);
 
       checkLadderSnake(&playerArray[i], L, S, ladderCount, snakeCount);
     }
   }
 }
 
-void computer(int computer){
+void computer(int computer, int player){
     // printf("Ceritanya anda bermain nichhh dengan %d player", players);
   char colors[4][7] = {"\033[31m", "\033[34m", "\033[32m", "\033[33m"};
-  Player playerArray[computer];
-  initiatePlayers(playerArray, computer);
-  printPlayers(playerArray, computer, colors, 4);
-  int difficulty = setDifficulty();
+  Computer computerArray[computer];
+  Computer playerArray[player];
   int ladderCount, snakeCount;
-  getLadderSnakeCount(&ladderCount, &snakeCount, difficulty);
   Snake S[snakeCount];
   Ladder L[ladderCount];
+
+
+  initiatePlayers(computerArray, computer);
+  printPlayers(computerArray, computer, colors, 4);
+  int difficulty = setDifficulty();
+  
+  getLadderSnakeCount(&ladderCount, &snakeCount, difficulty);
+
   initiateBoard(snakeCount, ladderCount, S, L);
   bool isRunning = true;
   int grid = 10;
@@ -120,8 +130,8 @@ void computer(int computer){
       system("clear");
       printf("Keterangan: L = Tangga, S = Ular");
       printf("\n");
-      printBoardVSPlayer(S, L, playerArray, snakeCount, ladderCount, computer, grid);
-      printBlock0(playerArray, computer);
+      printBoardVSPlayer(S, L, computerArray, snakeCount, ladderCount, computer, grid);
+      printBlock0(computerArray, computer);
       int temp;
       getchar();
       printf("Giliran Comoputer %d\n", i+1);
@@ -130,7 +140,8 @@ void computer(int computer){
       scanf("%d", &temp);
       
 
-      move(rollDice(), &playerArray[i], grid);
+      move(rollDice(difficulty), &playerArray[i], grid);
+      move(rollDice(difficulty), &computerArray[i], grid);
       checkLadderSnake(&playerArray[i], L, S, ladderCount, snakeCount);
     }
   }
