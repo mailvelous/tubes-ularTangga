@@ -1,5 +1,6 @@
 #ifndef game_c
 #define game_c
+#include "board.c"
 #include "types.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +14,7 @@ int checkNearestLadder(Ladder L[], int ladderCount, Player player);
 
 void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount,
                       int snakeCount);
-int checkNearestSnake(Snake S[], int snakeCount, Player player);                      
+int checkNearestSnake(Snake S[], int snakeCount, Player player);
 int checkWin(Player player, Player Winners[]);
 
 int rollDice(int difficulty) {
@@ -21,8 +22,6 @@ int rollDice(int difficulty) {
   int max = 6;
   return (rand() % (max - min + 1) + min);
 }
-
-
 
 int rollDiceRigged(int difficulty, int nearestLadder, int nearestSnake) {
   int min = 1;
@@ -79,7 +78,28 @@ void move(int n, Player *player, int grid) {
   if ((*player).position > max) {
     (*player).position = max - (*player).position + max;
   }
-  printf("Player %s have moved %d steps\n", (*player).name, n);
+  printf("Player %s have moved %d steps, now on block number %d\n",
+         (*player).name, n, (*player).position);
+}
+
+void stepOnPlayer(Player playerArray[], int playerCount, int blockNum,
+                  int playerNum) {
+  int playerHere[playerCount];
+  int playerHereCount = 0;
+  if (blockNum != 0) {
+    searchPlayer(playerArray, playerCount, blockNum, playerHere,
+                 &playerHereCount);
+    if (playerHereCount > 1) {
+      for (int i = 0; i < playerHereCount; i++) {
+        if (playerHere[i] != playerNum) {
+          playerArray[playerHere[i]].position = 0;
+          printf("Player %d menginjak Player %d (WKWK XD). PLayer %d sekarang "
+                 "di kotak 0\n",
+                 playerNum, playerHere[i], playerHere[i]);
+        }
+      }
+    }
+  }
 }
 
 void setPosition(int n, Player *player) { (*player).position = n; }
@@ -109,14 +129,16 @@ void checkLadderSnake(Player *player, Ladder L[], Snake S[], int ladderCount,
   for (int i = 0; i < ladderCount; i++) {
     if ((*player).position == L[i][0]) {
       setPosition(L[i][1], player);
-      printf("Player %s discovered a Ladder! (YAYY :D) %s now on block %d",
+      printf("Player %s discovered a Ladder! (YAYY :D) Player %s is now on "
+             "block %d\n",
              (*player).name, (*player).name, L[i][1]);
     }
   }
   for (int i = 0; i < snakeCount; i++) {
     if ((*player).position == S[i][0]) {
       setPosition(S[i][1], player);
-      printf("Player %s discovered a Snake! (AWW T-T) %s now on block %d",
+      printf("Player %s discovered a Snake! (AWW T-T) Player %s is now on "
+             "block %d\n",
              (*player).name, (*player).name, S[i][1]);
     }
   }

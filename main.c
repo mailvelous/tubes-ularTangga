@@ -91,18 +91,21 @@ void multiplayer(int players) {
       }
 
       int dice = rollDice(difficulty);
+      system("clear");
       move(dice, &playerArray[i], grid);
 
       checkLadderSnake(&playerArray[i], L, S, ladderCount, snakeCount);
-
+      if (difficulty == 3) {
+        stepOnPlayer(playerArray,players,playerArray[i].position,i);
+      }
       printBoardVSPlayer(S, L, playerArray, snakeCount, ladderCount, players,
                          grid);
       printBlock0(playerArray, players);
       if (dice == 6) {
-        i -= 1;
         printf("Karena mendapat angka 6, Player %d (", i + 1);
         printPlayerIcons(i, colors, 4);
         printf(") mendapat giliran lagi");
+        i -= 1;
       }
       printf("\nTekan spasi untuk ke giliran selanjutnya\n");
       while (isRunning) {
